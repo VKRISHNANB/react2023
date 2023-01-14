@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Boundary</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <script type="text/babel">
+         function InputControl({labelText, onTextBlur})
+          {
+            return(
+                  <div className="form-group form-group-sm">
+                      <label className="col-sm-2 control-label">{labelText}:</label>
+                      <input type="text" defaultValue="0" onBlur={onTextBlur}  className="form-control"  style={{width: 150}}></input>
+                  </div>
+            );
+          }
+      class ErrorBoundary extends React.Component {
+        state = {error: null}
+
+        static getDerivedStateFromError(error) {
+          return {error}
+        }
+        render() {
+          const {error} = this.state
+          if (error) {
+            return <this.props.FallbackComponent error={error} />
+          }
+          return this.props.children
+        }
+      }
+  
+      function ErrorFallback({error}) {
+        return (
+          <div>
+            <p>Arithmetic ERROR:</p>
+            <pre  style={{width: 200}}>{error.message}</pre>
+          </div>
+        )
+      }
+      function  Calculate ({firstvalue,secondvalue}) {
+        if(secondvalue==0 )
+        {
+          console.log('if-'+secondvalue);
+          throw new Error(`💥 DivizibleByZERO!!! 💥`) ;
+        }
+        else{
+          console.log('else- '+secondvalue);
+          const result=firstvalue/secondvalue;
+          return(
+                <div className='container'>
+                   <h1>Result :{result}</h1>
+                  </div>
+          );
+        }
+      }
+      function App() {
+        const firstvalueref = React.useRef(0);
+        const secondvalueref = React.useRef(1);
+        const [errorBoundaryKey, setErrorBoundaryKey] = React.useState(0)
+        return (
+          <div className="container">
+              <header>
+                  <div >
+                      <img src="Smily.png" width="50" height="50"  alt="" />
+                      <h1>Divide Numbers</h1>
+                  </div>
+              </header>
+              <InputControl labelText='First Value' onTextBlur={(e)=>firstvalueref.current=e.target.value} />
+              <InputControl labelText='Second Value' onTextBlur={(e)=>secondvalueref.current=e.target.value} />
+              <div>
+                <button onClick={() => setErrorBoundaryKey(errorBoundaryKey+1)}>💣</button>
+            </div>
+            <div>
+                    <ErrorBoundary key={errorBoundaryKey} 
+                                              FallbackComponent={ErrorFallback}>
+                       <Calculate firstvalue={firstvalueref.current} 
+                                          secondvalue={secondvalueref.current} />
+                    </ErrorBoundary>
+            </div>
+          </div>
+        )
+      }
+      ReactDOM.render(<App />, document.getElementById('root'))
+/*
+*  provide a key to an instance of ErrorBoundary component 
+*  to reset the instant.error in the next render phase.
+*/
+
+    </script>
+  </body>
+  
+</html>

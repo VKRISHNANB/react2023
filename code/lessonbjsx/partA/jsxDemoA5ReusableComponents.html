@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reusable Elements</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root_element = document.getElementById('root');    
+      // arrow functions 
+      const Message = props =>
+      <div className="message">{props.msg} </div>;
+    
+     // JSX Element 
+      const element = (<div className="container">
+            <Message>Hi</Message> // Hi will not be displayed 
+            <Message msg="Greetings" />
+             {Message({msg: 'Hello'})}
+          </div>);
+
+          // const element = (<div className="container">
+          //   <Message msg="Greetings" />
+          //    <Message msg="Hello" />
+          //    <Message msg="Welcome" />
+          // </div>);
+      ReactDOM.render( element, root_element );
+          /*
+            <Message>Hello</Message>
+            Here Message is treated as an element 
+            All elements will have an attribute children
+            The 'children' attribute of the <Message> element is empty here.
+            The 'msg' attribute of the <Message> element is also empty here.
+            The props does not have a value for msg, as well as the children fields.
+            CHANGE const Message as follows
+              // const Message = props =>
+              // <div className="message">{props.msg} {props.children}</div>;
+
+            Mean while in <Message msg="Greetings" />
+            we are passing value for msg field of the props which is returned as the children value by the function Message(props)
+          */
+    </script>
+  </body>
+</html>

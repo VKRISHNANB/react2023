@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOC</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root_element= document.getElementById('root');
+
+        function Welcome(props) {
+            return <h1>Welcome {props.fullname} </h1>;
+        }
+
+        function LogProps(WrappedComponent) {
+            class NewComponent extends React.Component {
+                componentDidMount() {
+                    console.log(this.props);
+                }
+                render() {
+                    let fullName="";
+                    if(typeof this.props.title=== 'undefined')
+                        fullName="Hi!" +" "+this.props.name;
+                    else
+                         fullName=this.props.title +" "+this.props.name;
+                         
+                    return <WrappedComponent fullname={fullName} {...this.props} />;
+                }
+            }
+            return NewComponent;
+        }
+        function App() {
+            const Element=LogProps( Welcome );
+            console.log(Element);
+            return (
+                <div>
+                        <Element name='Venkat' title="Mr."/>
+                        <Element name='Suresh' />
+                 </div>
+            );
+        }
+        ReactDOM.render(<App />, root_element);
+    </script>
+</body>
+</html>

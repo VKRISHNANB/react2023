@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WithoutBabel</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <!-- With out Babel-->
+</head>
+    <body> <div id="root"></div>
+    <script type="text/javascript">
+        const root_element =  document.getElementById('root');
+        /* const element = React.createElement('div', {
+             className: 'container',
+             children: 'Hello Kochi'
+         });*/
+        // Creating JSX element
+        const element = (
+        <h1>
+            Hello, React Developer!
+        </h1>
+        );
+        // we have an Uncaught SyntaxError: Unexpected token '<'
+        
+        // that is because The above new element is not a java script code
+        // it is a JSX code and the browser does not understand it 
+        // This code can not run without including Babel
+        const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+
+    </script> 
+    </body>
+    </html>

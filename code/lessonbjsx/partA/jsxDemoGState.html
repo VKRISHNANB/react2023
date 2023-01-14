@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Using State</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {date:props.date};
+      }
+
+      componentDidMount() {
+        console.log("Mounted");
+        this.timerID = setInterval( () => this.tick(), 5000 );
+      }
+      componentWillUnmount() {
+        console.log("UnMounted");
+        clearInterval(this.timerID);
+      }
+      tick() {
+        this.setState({ date: new Date()  });
+      }
+      
+      render() {
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>Date is {this.state.date.toLocaleDateString()}.</h2>
+            <h2>Time is {this.state.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+    }
+
+     let data={
+       date:new Date(1990,0,1)
+     }
+     let container = document.getElementById('root');
+    ReactDOM.render(
+          <Clock date={data.date}/>,
+          container
+        );
+     
+    </script>    
+  </body>
+</html>

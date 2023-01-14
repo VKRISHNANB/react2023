@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>refForward</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+              const root_element= document.getElementById('root');
+              const NameInput =  ((props, ref) => (
+                <div  className="form-group form-group-sm">
+                    <label className="col-sm-2 control-label">{props.labeltext}</label>
+                    <input ref={ref} {...props} type="text" className="form-control"  style={{width: 150}} />
+                </div>
+              ));
+              
+            const App = () => {
+                const myRef = React.useRef(null);
+                const handleClick = () => {
+                    myRef.current.focus()
+                    myRef.current.value='Testing';
+                }
+                return (
+                    <div className="container">
+                        <header>
+                            <div className="container">
+                                    <img src="Smily.png" width="100" height="100"  alt="Smile" />
+                                    <h1>Ref</h1>
+                            </div>
+                        </header>
+                        <NameInput ref={myRef} labeltext="Name"/>
+
+                        <div className="form-group form-group-sm">
+                            <label htmlFor="txtcity" className="col-sm-2 control-label">City: </label>
+                            <input id="txtcity" type="text" defaultValue="" className="form-control"  style={{width: 150}}/>
+                        </div>
+                        <div>
+                            <button onClick={handleClick}>
+                                Click here to focus Input
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+
+              ReactDOM.render(<App />, root_element);
+
+    </script>
+    
+    
+</body>
+</html>

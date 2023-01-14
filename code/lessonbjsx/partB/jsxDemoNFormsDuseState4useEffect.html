@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useState</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+            function NameForm() {
+                //
+                //     const [name,setName] = React.useState(
+                //     window.localStorage.getItem('name') || 'empty');
+
+                // console.log('count');
+
+                  //#region a
+                // /*
+                // *
+                // *  React.useState has a lazy initialization feature. 
+                // *  You can provide a function as the initial value, 
+                // *  and that function will be called to retrieve the initial value. 
+                // *  That function will only be called when it's absolutely necessary
+                // *   to retrieve the initial value. That is on the first render
+                // * /
+                //#endregion
+               
+                // LAzY initializer with useState
+                  const [name,setName] = React.useState( () => 
+                    { console.log('useState') ;
+                   return  window.localStorage.getItem('name') || ''
+                    });
+                console.log('count');
+
+                React.useEffect(()=> {
+                     console.log('useEffect-setItem');
+                      window.localStorage.setItem('name',name)
+                }    );
+                //
+                // useEffect is another hook like useState
+                // useEffect is called every time the react control is rendered
+            
+                const cityStateArray = React.useState('empty');
+                 const city= cityStateArray[0];
+                 const setCity= cityStateArray[1];
+                const handleNameChange = (event) => {
+                    console.log(event.target.value); setName(event.target.value) }
+                const handleCityChange = (event) => setCity( event.target.value)
+     
+                const  handleSubmit = ()=> {
+                              console.log(' Button clicked ');  
+                              event.preventDefault();  }
+                return (
+                    <div className="container">
+                            <form action="index.html" >
+                               <div> 
+                                    <label htmlFor="txtname"> Name: </label>
+                                    <input id="txtname" value = {name}
+                                                     onChange = {handleNameChange}
+                                                    className="form-control" />
+                                </div>
+                                <div>
+                                    <label > City: </label>
+                                    <input id="txtcity"
+                                                        type="text" defaultValue=""   
+                                                        onChange = {handleCityChange}
+                                                        className="form-control" />
+                                </div>
+                                <input type="button" onClick={handleSubmit}  value="click" />
+                            </form>    
+                            <div>Name: {name}</div>
+                            <div>City: {city}</div>
+                    </div>
+                )
+            }
+            ReactDOM.render(
+        <NameForm />,   document.getElementById('root')    );
+      
+    </script>
+</body>
+</html>

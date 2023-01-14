@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useState</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div id="root"></div>
+ 
+    <script type="text/babel">
+
+      function useLocalStorageState(key, defaultValue = 'empty') {
+            const [state, setState] = React.useState(
+              () => window.localStorage.getItem(key) || defaultValue,
+            )
+  
+            React.useEffect(() => {
+              window.localStorage.setItem(key, state)
+            }, [key, state])
+      
+            return [state, setState]
+      }
+  
+      function NameForm() {
+        const [name, setName] = useLocalStorageState('name')
+        const [city, setCity] = useLocalStorageState('city')
+        const handleChange = event => setName(event.target.value)
+        const handleCityChange = event => setCity(event.target.value)
+        return (
+          <div>
+            <form>
+              <div>
+              <label htmlFor="name">Name: </label>
+              <input value={name} onChange={handleChange} id="name" />
+              </div>
+              <div>
+              <label htmlFor="city">City: </label>
+              <input defaultValue="" onBlur={handleCityChange} id="city" />
+              </div>
+            </form>
+            {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+            {city ? <strong> {city}</strong> : 'Please type your city'}
+          </div>
+        )
+      }
+      const root_element = document.getElementById('root');     
+      const root = ReactDOM.createRoot(root_element);
+        root.render(<NameForm />);
+    </script>
+  </body>
+  

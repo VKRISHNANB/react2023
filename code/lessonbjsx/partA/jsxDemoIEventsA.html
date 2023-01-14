@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> 
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    class BuyButton extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isToggleOn: true};
+        // This binding is necessary to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
+      }
+      // handleClick is bound to this (current object)
+      handleClick() {
+        console.log('Button clicked ' + this.state.isToggleOn);
+        this.setState(prevState => ({
+          isToggleOn: !prevState.isToggleOn
+        }));
+      }
+      // addWish is an unbound event handler, so this is undefined
+      addWish() {
+        console.log('addWish Button clicked ', this);
+      }
+      // removeWish is an arrow function, and is a bound event handler
+      // explicit binding is not required
+      removeWish = ()=> {
+        console.log('RemoveWish Button clicked ', this);
+      }
+      render() {
+        return (
+          <div>
+            <div>
+              <button className="btn btn-primary"
+              onClick={this.handleClick} >
+              {this.state.isToggleOn ? 'Buy' : 'Cancel'}
+              </button>
+            </div>
+            <div>
+                <button className="btn btn-primary"
+                onClick={this.addWish}> AddToWishList </button>
+            </div>
+            <div>
+                <button className="btn btn-primary"
+                onClick={this.removeWish} > RemoveFromWishList </button>
+            </div>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(
+      <BuyButton/>, document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>

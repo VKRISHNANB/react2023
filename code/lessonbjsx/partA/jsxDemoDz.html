@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Conditional statements</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="second-root"></div>
+    <script type="text/babel">
+        function formatName(user) {
+            return user.firstName + ' ' + user.lastName;
+        }
+// React Component
+        function GetGreeting(user) {
+            if (user) {
+                return <h1>Hello, {formatName(user)}!</h1>;
+            }
+            return <h2>Hello, Stranger.</h2>;
+        }
+        const userdata = {
+          firstName: 'VenkataKrishnan ',
+          lastName: 'B'
+          };
+//**********************       
+        //VERSION 2 Using Conditional statements with JSX
+        const element = GetGreeting(userdata);
+ 
+//*************************       
+        // const element = (
+        //   <div>
+        //       <GetGreeting {...userdata} > </GetGreeting>
+        //   </div>
+        // );
+//****************************
+        // const element = (
+        //   <div>
+        //       <GetGreeting firstName = 'Suresh' lastName = 'Krishna' > </GetGreeting>
+        //   </div>
+        // );
+//*****************************
+  const userdata2 =  {
+          firstName: 'John ',
+          lastName: 'Mathew',
+          middleName: 'B',
+          title: 'Dr.'
+          };
+  // const element =  GetGreeting(userdata2);
+//**************************
+      //  function formatName({...rest}) {
+      //       var output = '';
+      //       for(var property in {...rest})
+      //       {
+      //         output += {...rest}[property] + " ";
+      //       }
+      //       return output;
+      //  }        
+     
+//**************************
+      //  function formatName({firstName, lastName, ...rest}) {
+      //       console.log('Hi', {...rest});
+      //       // var vrest = {...rest};
+      //       //  return firstName + ' ' + lastName + ' ' + JSON.stringify( vrest) ;
+
+      //       var output = '';
+      //       for(var property in {...rest})
+      //       {
+      //         output += {...rest}[property] + ".";
+      //       }
+      //       return firstName + ' ' + lastName + '.' +output;
+      //  }        
+//****************************       
+        ReactDOM.render(
+            element,  document.getElementById('root')
+        );
+        ReactDOM.render(
+            GetGreeting(null),  document.getElementById('second-root')
+        );        
+    </script>
+  </body>
+</html>

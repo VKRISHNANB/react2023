@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOC</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root_element= document.getElementById('root');
+        function Welcome(props) {
+            return (
+                <>
+                        <h1>Welcome {props.fullname} </h1>
+                        <input defaultValue={props.value}  onBlur={(e)=>props.onChange(e.target.value)}/>
+                </>)
+        }
+        function LogPropsHOC(WrappedComponent) {
+            class NewComponent extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.handleChange = this.handleChange.bind(this);
+                    this.state = {   data: ""  };
+                }
+                componentDidMount() {
+                    console.log("Mounted",  this.props );
+                    if(typeof this.props.title=== 'undefined')
+                        this.setState(  {data: "Hi" + " "+this.props.name} );
+                    else
+                         this.setState(  {data: this.props.title +" "+this.props.name} );
+                }
+                handleChange(data) {
+                    this.setState({
+                        data: data
+                    });
+                    console.log("Name Changed Previous Name "+this.state.data);
+                }
+                render() {
+                    return <WrappedComponent fullname={this.state.data} 
+                                                value={this.state.data} {...this.props} 
+                                                onChange={this.handleChange} />;
+                }
+            }
+            return NewComponent;
+        }
+
+        function App() {
+            // const input = (props)=>{ return(<input value={props.value}  onChange={(e)=>props.onChange(e.target.value)}/>)}
+            const Element=LogPropsHOC( Welcome );
+            return (
+                <div className="container">
+                    <div>
+                        <Element name='Venkat' title="Mr." />
+                    </div>
+                        <Element name='Suresh' />
+                 </div>
+            );
+        }
+        ReactDOM.render(<App />, root_element);
+    </script>
+</body>
+</html>

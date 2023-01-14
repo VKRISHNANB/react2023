@@ -1,0 +1,37 @@
+<mxfile host="65bd71144e">
+    <diagram id="mRvCVPGDT-BCA4jdKjfe" name="currency">
+        <mxGraphModel dx="640" dy="409" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="&lt;font style=&quot;font-size: 24px&quot;&gt;functions&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="241" y="30" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;span style=&quot;background-color: rgb(1 , 22 , 39) ; font-size: 16px ; color: rgb(130 , 170 , 255) ; font-style: italic&quot;&gt;toIndianRupee&lt;/span&gt;&lt;span style=&quot;background-color: rgb(1 , 22 , 39) ; font-size: 16px ; color: rgb(217 , 245 , 221)&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;background-color: rgb(1 , 22 , 39) ; font-size: 16px ; color: rgb(215 , 219 , 224)&quot;&gt;usd&lt;/span&gt;&lt;span style=&quot;background-color: rgb(1 , 22 , 39) ; font-size: 16px ; color: rgb(217 , 245 , 221)&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;div style=&quot;color: rgb(214 , 222 , 235) ; background-color: rgb(1 , 22 , 39) ; font-size: 16px ; line-height: 22px&quot;&gt;&lt;span style=&quot;color: #82aaff ; font-style: italic&quot;&gt;toUSDollar&lt;/span&gt;&lt;span style=&quot;color: #d9f5dd&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #d7dbe0&quot;&gt;inr&lt;/span&gt;&lt;span style=&quot;color: #d9f5dd&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="241" y="90" width="149" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;font style=&quot;font-size: 24px&quot;&gt;CountryCodeList&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="241" y="183" width="189" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="47" y="22" width="135" height="216" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;font style=&quot;font-size: 24px&quot;&gt;React Component&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="11" vertex="1">
+                    <mxGeometry width="135" height="67" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="group" vertex="1" connectable="0" parent="11">
+                    <mxGeometry y="67" width="133" height="149" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="ParentComponent&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#33001A;align=center;" parent="10" vertex="1">
+                    <mxGeometry width="133" height="149" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="INR Amount" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#190033;" parent="10" vertex="1">
+                    <mxGeometry y="99" width="133" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="USD Amount" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#190033;" parent="10" vertex="1">
+                    <mxGeometry y="56" width="133" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

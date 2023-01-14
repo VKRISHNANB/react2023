@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Conditional Rendering</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="second-root"></div>
+    <div id="third-root"></div>
+
+    <script type="text/babel">
+
+        function formatName(user) {
+            return user.firstname + ' ' + user.lastname;
+        }
+
+        function getGreeting(user) {
+            if (user) {
+                return <h1>Hello, {formatName(user)}!</h1>;
+            }
+            return <h2>Hello, Stranger.</h2>;
+        }
+        
+        const userdata = {
+          firstname: 'VenkataKrishnan ',
+          lastname: 'B'
+          };
+//**********************       
+        //VERSION 2 Using Conditional statements with JSX
+       const element = getGreeting(userdata);
+           
+//*************************       
+         ReactDOM.render(
+            element,  document.getElementById('root')
+        );
+        const second_element = getGreeting(null);
+        ReactDOM.render(
+          second_element,  document.getElementById('second-root')
+        );
+ //  Use PascalCase for React components, or lowercase for HTML elements.in getGreeting
+        // const third_element = (
+        //   <div>
+        //       <getGreeting {...userdata} > </getGreeting>
+        //   </div>
+        // );
+
+
+//*************************
+
+        function Greeting(user) {
+            if (user) {
+                return <h1>Hello, {formatName(user)}!</h1>;
+            }
+            return <h2>Hello, Stranger.</h2>;
+        }
+         
+        const third_element = (
+          <div>
+              <Greeting {...userdata} > </Greeting>
+          </div>
+        );
+      
+        ReactDOM.render(
+          third_element,  document.getElementById('third-root')
+        );
+    </script>
+  </body>
+</html>

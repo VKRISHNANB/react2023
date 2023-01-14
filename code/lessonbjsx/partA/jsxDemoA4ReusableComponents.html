@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reusable Elements</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root_element = document.getElementById('root');    
+      // arrow functions 
+      const message = props =>
+      <div className="message">{props.msg} </div>;
+     // JSX Element 
+      const element = (<div className="container">
+            <message>Hello</message>
+             {message({msg: 'Hello'})}
+             {message({msg: 'Welcome'})}
+          </div>);
+      ReactDOM.render( element, root_element );
+      /*
+      Warning: The tag <message> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+    at message
+    at div
+    */
+    </script>
+  </body>
+</html>

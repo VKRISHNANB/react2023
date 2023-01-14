@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ComponentUpdate</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <input value="Name here" class="form-control" />
+    <input value="password" class="form-control" />
+
+    <script type="text/javascript">
+        const root_element = document.getElementById('root');
+        function tick() {
+            const time = new Date().toLocaleTimeString();
+            const element = ( `
+                <div>
+                  <h1>Hello, world!</h1>
+                  <input value=${time} class="form-control" />
+                  <input value=${time} class="form-control" />
+                 <input value="City" class="form-control" />
+                </div>`
+            );
+           root_element.innerHTML = element;
+        }
+          //#region  a
+        /*
+         // function tick() {
+        //     const element = ( `
+        //         <div>
+        //           <h1>Hello, world!</h1>
+        //           <h2>It is ${new Date().toLocaleTimeString()}.</h2>
+        //         </div>`
+        //     );
+        //     root_element.innerHTML = element;
+        // }
+         */
+       //#endregion
+        tick();
+        setInterval(tick, 1000);
+        /*  
+        * Use HTML string, and interpolate . 
+        * Then instead of ReactDOM.render, we're going to say root element.innerHTML equals that element.
+        *  it's updating the entire contents of our application every time, starting from this root element. 
+        * That's not optimal, because it causes a couple of problems. 
+        * If I make couple of input controls, and set the value to that time,
+        * They are updating every second, but as you click in any input box, the focus is going away. 
+        * That's because the old input elements are getting totally removed from the DOM, and the new elements are getting put in their place.
+        *  React doesn't have this problem.
+        * 
+        */
+    </script>
+  </body>
+</html>

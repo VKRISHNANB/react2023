@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Props</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="second-root"></div>
+
+    <script type="text/babel">
+      function Welcome(props) {
+        return <h1>Hello, Mr. {props.name}</h1>;
+      }
+      const user = {
+        name: 'VenkataKrishnan ',
+        password: '1234@password'
+      };
+      ReactDOM.render(
+        Welcome(user), document.getElementById('root')
+      );
+      
+      class Greetings extends React.Component {
+        render() {
+        return <h1>Hello, Mr. {this.props.name}</h1>;
+        }
+      }
+      const second_element = <Greetings name="Sam" />;
+     
+      ReactDOM.render(
+        second_element ,  document.getElementById('second-root')
+      );
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+<!-- function Welcome(props) {
+  // props.name = 'Mr.' + props.name; // impure function
+  return <h1>Hello, Mr. {props.name}</h1>;
+} -->

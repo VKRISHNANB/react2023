@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProtoTypes</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+</head>
+<body>
+   <div id="root"></div>
+
+    <script  type="text/babel">	
+     const root_element =  document.getElementById('root');
+        function SayHello ({firstName,lastName})
+        {
+                return <h1>Hello, {firstName} {lastName}  !</h1>;
+        } 
+
+        SayHello.propTypes = {
+            firstName: PropTypes.string,
+            lastName : PropTypes.string
+        }
+        const element = <SayHello firstName={false} />
+        const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+
+// As validating data type is common, the React team created a package on npm that we can use from unpackage.
+// including the script for prop-types  creates a global variable here for us called prop-types 
+//  Before, we were getting a warning for both the first name and the last name, but now we're just getting one for the first name.
+// The reason for that is that prop-types by default are not required. Because the last name wasn't provided, we're not getting the last name validated in this case. 
+
+
+        </script>
+</body>
+</html>

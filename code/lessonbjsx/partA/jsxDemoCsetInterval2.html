@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ComponentUpdate</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+    //  function tick() {
+    //     const element = (
+    //         <div>
+    //           <h1>Hello, world!</h1>
+    //           <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    //         </div>
+    //     );
+    //     return element;
+    //   }
+    //   ReactDOM.render(tick(), document.getElementById('root'));
+
+
+// 2 **********************************    
+      function tick() {
+            const time = new Date().toLocaleTimeString();        
+        const element = (
+                <div>
+                  <h1>Hello, world!</h1>
+                  <input value={time} className="form-control" />
+                  <input value={time} className="form-control" />
+                 <input type="text" className="form-control" defaultValue="Chennai" />
+                </div>
+        );
+        ReactDOM.render(element, document.getElementById('root'));
+      }
+     setInterval(tick, 1000);
+    //************************
+ 
+    ReactDOM.render(tick(), document.getElementById('root'));
+    </script>
+  </body>
+</html>

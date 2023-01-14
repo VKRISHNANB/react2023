@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello JSX</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- https://babeljs.io/-->
+    
+    <script type="text/babel">
+        const root_element =  document.getElementById('root');
+
+      /* const element = React.createElement('div', {
+             className: 'container',
+             children: 'Hello Goa'
+         });*/
+         // Using Babel to convert JSX to Browser friendly js code
+      const element = ( <div className="container">
+        <h1>
+            Hello, React Developer!
+        </h1> </div>
+        );
+
+        const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+    </script>
+  </body>
+</html>

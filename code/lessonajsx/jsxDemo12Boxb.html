@@ -1,0 +1,205 @@
+<body>
+ <div>
+<script src="https://unpkg.com/react/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+</div>
+<div id="root"></div>
+<style>
+.box {
+  border: 1px solid #333;
+}
+
+.box--large {
+  width: 180px;
+  height: 180px;
+}
+
+.box--medium {
+  width: 120px;
+  height: 120px;
+}
+
+.box--small {
+  width: 60px;
+  height: 60px;
+}
+.box--bg {
+  background-color: #52E396;
+}
+</style>
+
+<script type="text/babel">
+// 1 *************************
+
+/* 
+It is camel-cased instead of kebab-cased .
+Note: kebab-cased or kebab case ->  is a programming variable naming convention where a developer replaces the spaces between words with a dash 
+*/
+// We cannot use class as a variable; it would be a syntax error. paddingLeft is written in the same style.
+// style takes an object instead of a string
+// const element = (
+//   <div> 
+//      <div className="box box--small" 
+//      style={{paddingLeft: 20}}> Inside a Box</div>  
+//    <div className="box box--medium" 
+//      style={{paddingLeft: 20}}> Inside a Box</div>  
+//   </div>
+// )
+// 2 **********************
+// extract className, style props into an object and then spread them out on the div using the spread operator ...
+// const props = {
+//   className: `box box--medium box--bg`,
+//   style: {paddingLeft: 20}
+// }
+// const element = (
+//   <div> 
+//      <div {...props} > Inside a Box</div>  
+//      <div {...props} > Inside a Box</div>  
+//   </div>
+// )
+
+// 3 **********************
+
+//  extract the classname value into a variable called classname and use object shorthand to add it to the props.
+// const className = `box box--medium box--bg`;
+// const props = {
+//   className,
+//   style: {paddingLeft: 20}
+// }
+// const element = (
+//   <div> 
+//      <div {...props} > inside a Box</div>  
+//      <div {...props} > inside a Box</div>  
+//   </div>
+// )
+
+// 4 ***************************
+
+// functioning component called box.
+// We'll accept all the props and spread them across the div we rendered,
+// so you can pass other props to the box component.
+// Let's render that here with box.
+// Now, let's add a style prop to the box with background color light blue.
+// function Box(props) {
+//   return (
+//     <div
+//       className = "box box--medium"
+//       style = {{paddingLeft: 20}}
+//       {...props}
+//      />
+//   )
+// }
+// const element = (
+//   <div>
+//       <Box style={{backgroundColor: 'lightblue'}}>Hello!!! Anybody home </Box>
+//   </div>
+// )
+// WARNING:
+// we've lost our padding on the box.
+// This is because object spread does a shallow merge of the objects given, so the style prop given to the box component is overriding its own style prop.
+
+// **********************
+
+//  Let's destructure the props,
+// pull out the style prop, and call the rest of the props rest.
+// Then we'll spread the rest props onto the div.
+// Then we'll merge the style prop with our own styles. 
+// This would be much more difficult to do if 
+// <important> 
+//    the style prop accepted a string of CSS instead of an object 
+// <important>
+// function Box({style, ...rest}) {
+//   return (
+//     <div
+//       className = "box box--medium"
+//       style = {{paddingLeft: 20,...style}}
+//       {...rest}
+//      />
+//   )
+// }
+// const element = (
+//   <div>
+//       <Box style={{backgroundColor: 'lightblue'}}>Hello!!! Anybody home </Box>
+//   </div>
+// )
+
+// **********************
+
+// function Box({style, ...rest}) {
+//   return (
+//     <div
+//       className = "box"
+//       style = {{paddingLeft: 20,...style}}
+//       {...rest}
+//      />
+//   )
+// }
+
+// destructure classname out and assign the classname on the div to a template literal instead. 
+// interpolate the classname that we're given.
+// function Box({style,className, ...rest}) {
+//   return (
+//     <div
+//       className = {`box ${className}`}
+//       style = {{paddingLeft: 20,...style}}
+//       {...rest}
+//      />
+//   )
+// }
+
+// const element = (
+//   <div>
+//       <Box className = "box--medium"
+//           style={{backgroundColor: 'lightblue'}}>Hello!!! Anybody home </Box>
+//   </div>
+// )
+// WARNING :
+// if we remove the classname from where we're rendering the box and check out the DOM.  we're getting the classname of undefined. 
+// This is happening because the classname prop does not exist, so it's undefined. We'll add a default value for the classname to be an empty string.
+
+// function Box({style,className = '', ...rest}) {
+//   return (
+//     <div
+//       className = {`box ${className}`}
+//       style = {{paddingLeft: 20,...style}}
+//       {...rest}
+//      />
+//   )
+// }
+
+// const element = (
+//   <div>
+//       <Box 
+//           style={{backgroundColor: 'lightblue'}}>Hello!!! Anybody home </Box>
+//   </div>
+// )
+
+// **********************
+// function Box({style,className = '', ...rest}) {
+//   return (
+//     <div
+//       className = {`box ${className}`}
+//       style = {{paddingLeft: 20,...style}}
+//       {...rest}
+//      />
+//   )
+// }
+// const element = (
+//   <div>
+//       <Box className = "box--small"
+//           style={{backgroundColor: 'lightblue'}}>small </Box>
+//           <Box className = "box--medium"
+//           style={{backgroundColor: 'pink'}}>medium </Box>
+//           <Box className = "box--large"
+//           style={{backgroundColor: 'orange'}}>large </Box>
+//   </div>
+// )
+// **********************
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+)
+</script>
+</body>

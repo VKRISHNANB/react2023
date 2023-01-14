@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Boundary</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/babel">
+      function InputControl({labelText, onTextBlur})
+      {
+        return(
+              <div className="form-group form-group-sm">
+                  <label className="col-sm-2 control-label">{labelText}:</label>
+                  <input type="text" defaultValue="0" onBlur={onTextBlur}  className="form-control"  style={{width: 150}}></input>
+              </div>
+        );
+      }
+      function App() {
+        const [result, setResult] = React.useState(0)
+        const [firstValue, setFirstValue] = React.useState(0)
+        const [secondValue, setSecondValue] = React.useState(0)
+
+       const  throwError = (message)=> {
+        throw new Error(`💥 ${message} 💥`)
+      }
+        return (
+          <div className="container">
+              <header>
+                  <div >
+                      <img src="Smily.png" width="50" height="50"  alt="" />
+                      <h1>Divide Numbers</h1>
+                  </div>
+              </header>
+              <InputControl labelText='First Value' 
+                                      onTextBlur={(e)=>setFirstValue(e.target.value)} />
+              <InputControl labelText='Second Value' 
+                                      onTextBlur={(e)=>setSecondValue(e.target.value)} />
+              <div>
+                    <button onClick={() => {
+                      secondValue>0 ? setResult(firstValue/secondValue): throwError('DivisibleByZERO' )                
+                    }}>💣</button>
+              </div>
+              <div>
+                      Result : {result}
+              </div>
+          </div>
+        )
+      }
+      ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+  </body>
+  
+</html>

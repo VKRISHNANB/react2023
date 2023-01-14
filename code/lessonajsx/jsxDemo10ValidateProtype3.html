@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProtoTypes</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+</head>
+<body>
+   <div id="root"></div>
+
+    <script  type="text/babel">	
+     const root_element =  document.getElementById('root');
+        function SayHello ({firstName,lastName})
+        {
+                return <h1>Hello, {firstName} {lastName}  !</h1>;
+        } 
+// PropTypes is used for validating the values passed to component.
+// in addition to string we can add validations for other data types too.
+        const PropTypes = {
+                string(props, propName, componentName) {
+                        if(typeof props[propName] !== ' string' )
+                        {
+                                return new Error(`ERROR,  the prop ${propName} is NOT a string, TYPEOF the prop is ${typeof props[propName]},  component:  ${componentName}`);
+                        }
+                }
+                
+        }
+        SayHello.propTypes = {
+            firstName: PropTypes.string,
+            lastName : PropTypes.string
+        }
+        const element = <SayHello firstName={false} />
+        const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+        </script>
+</body>
+</html>

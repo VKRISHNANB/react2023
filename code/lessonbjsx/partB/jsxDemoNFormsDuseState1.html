@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useState</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+            function NameForm() {
+                //ERROR
+                const phoneState = this.state.setState({phone: '000000'});
+                return (
+                    <div className="container">
+                        <form  action="index.html" >
+                            <div> 
+                                    <label htmlFor="txtname"> Name: </label>
+                                    <input id="txtname" name="txtname"
+                                                    type="text" defaultValue=""   
+                                                    className="form-control" />
+                            </div>
+                            <div> 
+                                    <label > City: </label>
+                                    <input id="txtcity" 
+                                                    type="text" defaultValue=""   
+                                                    className="form-control" />
+                            </div>
+                            <h2>Phone is { this.state.phone}</h2>
+                        </form>      
+                    </div>
+                )
+            }
+            ReactDOM.render(
+        <NameForm />,   document.getElementById('root')    );
+        /*
+        *
+        * htmlFor works like HTML for. binds the label to the input control. 
+        * When the label is selected the input gets focus
+        * The input must have an id attribute. 
+        * The value provided for the id attribute must be used in htmlFor 
+        * 
+        * */
+    </script>
+</body>
+</html>

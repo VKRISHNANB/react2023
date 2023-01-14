@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root_element =  document.getElementById('root');
+        function CharacterCount({text})
+        {
+            return(
+                <div>
+                   Text: "{text}" ,    Count:<strong> {text.length}</strong>
+                </div>
+            )
+        }
+      //  #region a 
+        // function CharacterCount({text})
+        // {
+        //     const length =text.length ? <strong>{text.length}</strong> : 'No Characters';
+        //     return(
+        //         <div>  { ` Text: "${text}" `},    Count: {length} </div>
+        //     )
+        // }
+        // function CharacterCount({text})
+        // {
+        //     return(
+        //         <div>
+        //             { ` Text: "${text}" `},   { 'Count:'} {text.length ? <strong>{text.length}</strong> : 'No Characters'  }
+        //         </div>
+        //     )
+        // }
+      //#endregion
+        const element = (
+                    <>
+                        <CharacterCount text="Javascript frameworks are great" />
+                        <CharacterCount text=""/>
+                    </>
+        );
+        const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+/*
+* Here we are going  between JSX, and JavaScript, and back again.
+* This is a limited JavaScript area because we can only do expressions. 
+* We're not allowed to do things like for loops, if statements, or any of that. 
+* It has to be an expression of JavaScript that evaluates to some value. 
+* A string like  ` Text: "${text}" `  or 
+* a ternary like text.length ? <strong>{text.length}</strong> : 'No Characters', 
+* those are expressions, and those are allowed within the curly braces.
+*
+*/
+    </script>
+</body>
+</html>
+

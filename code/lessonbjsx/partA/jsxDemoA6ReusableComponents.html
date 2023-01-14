@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reusable Elements</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root_element = document.getElementById('root');    
+      // arrow functions 
+      const Message = props =>
+      <div className="message">{props.children}</div>;
+     // JSX Element 
+      const element = (<div className="container">
+            <Message>Hi</Message>
+            <Message>Greetings</Message>
+            <Message>Hello</Message>
+            <Message>Welcome</Message>
+          </div>);
+
+      ReactDOM.render( element, root_element );         
+    </script>
+  </body>
+</html>

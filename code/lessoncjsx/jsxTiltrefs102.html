@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://unpkg.com/vanilla-tilt/dist/vanilla-tilt.min.js"></script>
+</head>
+<body>
+    <style>
+        /*
+        Taken from the vanilla-tilt.js demo site:
+        https://micku7zu.github.io/vanilla-tilt.js/index.html
+        */
+        .tilt-root {
+          height: 150px;
+          background-color: red;
+          width: 200px;
+          background-image: -webkit-linear-gradient(
+            315deg,
+            #ff00ba 0%,
+            #fae713 100%
+          );
+          background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+          transform-style: preserve-3d;
+          will-change: transform;
+          transform: perspective(1000px) rotateX(0deg) rotateY(0deg)
+            scale3d(1, 1, 1);
+        }
+        .tilt-child {
+          position: absolute;
+          width: 50%;
+          height: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translateZ(30px) translateX(-50%) translateY(-50%);
+          box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
+          background-color: white;
+        }
+        .totally-centered {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      </style>
+  <div id="root"></div>
+
+      <script type="text/babel">
+        function Tilt({children}) {
+                //  const tiltRef = React.useRef()
+                const tiltRef = React.useRef('hi')
+                console.log('Render - '+ tiltRef.current)
+      //#region a
+              /*
+              *
+              * undefined. 
+              * The reason we see that is because at the time that this function runs, 
+              * React has not created the DOM node for this div, 
+              * so the tiltRef.current is currently undefined. 
+              * In fact, you can initialize that current value by passing an argument to their useRef hook.
+              * 
+              *       const tiltRef = React.useRef('hi')
+              */
+            //
+              // We need to have some code that runs after React has updated the DOM and set our tiltRef.current property.
+              // Interacting with the DOM is a side effect. 
+              // The logical place for this would be in a React.useEffect hook.
+              //#endregion
+              React.useEffect(() => {
+                console.log('useEffect '+tiltRef.current)
+              });
+              return (
+      //#region ref attribute
+                /*  We need React to give us the DOM node that it creates, so we can wire up vanilla-tilt to it in React.useEffect hook
+                * To do this, we're going to use a ref prop and we need to pass a ref which is an object that has a mutable current property.*/
+              /*
+              *         
+              * ref are created, and attached to React elements via the <strong>ref </strong> attribute. 
+              * Refs are commonly assigned to an instance property when a component is constructed so they can be referenced throughout the component.
+              * 
+              */
+      //#endregion        
+                  <div ref={tiltRef} className="tilt-root" id="tiltroot">
+                    <div className="tilt-child">{children}</div>
+                  </div>
+                )
+        }
+    
+        function App() {
+          const [showTilt, setShowTilt] = React.useState(true)
+          return (
+            <div className="container">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showTilt}
+                  onChange={e => setShowTilt(e.target.checked)}
+                />{' '}
+                show
+              </label>
+              {showTilt ? (
+                <Tilt>
+                  <div className="totally-centered">Tom 😁 and Jerry 😊</div>
+                </Tilt>
+              ) : null}
+            </div>
+          )
+        }
+    
+        ReactDOM.render(<App />, document.getElementById('root'))
+      </script>
+</body>
+</html>

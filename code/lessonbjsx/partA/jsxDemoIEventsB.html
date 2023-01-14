@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Handlers B</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>Passing Arguments to Event Handlers</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+    class BuyButton extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isToggleOn: true};
+        // This binding is necessary to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+    handleClick() {
+      console.log('Button clicked ' + this.state.isToggleOn);
+      this.setState(prevState => ({
+         isToggleOn: !prevState.isToggleOn
+      }));
+    }
+    addWish(id) {
+      console.log('addWish Button clicked ', id);
+    }
+    removeWish (id){
+      console.log('RemoveWish Button clicked ', id);
+    }
+      render() {
+          return (
+            <div>
+              <div>
+                  <button className="btn btn-primary"
+                  onClick={this.handleClick}>
+                  {this.state.isToggleOn ? 'Buy' : 'Cancel'}</button>
+              </div>
+              <div>
+                  <button className="btn btn-primary"
+                  onClick={(e)=>this.addWish(5,e)} > AddToWishList </button>
+              </div>
+              <div>
+                  <button className="btn btn-primary"
+                  onClick={this.removeWish.bind(this,51)} > RemoveFromWishList </button>
+              </div>
+            </div>
+          )
+      
+      }
+    }
+      ReactDOM.render(
+        <BuyButton/>,
+          document.getElementById('root')
+        );
+    </script>
+  </body>
+</html>

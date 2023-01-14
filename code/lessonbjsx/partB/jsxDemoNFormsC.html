@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello Forms</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class NameForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {selectvalue: 'coconut', txtnamevalue:''};
+          this.handleChange = this.handleChange.bind(this);
+          this.handleSelectChange = this.handleSelectChange.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleChange(event) {
+          console.log(event.target.value);
+          this.setState({txtnamevalue: event.target.value.toUpperCase()});
+        }
+        handleSelectChange(event) {
+          this.setState({selectvalue: event.target.value});
+          console.log('Previous Favour: ' + this.state.selectvalue);
+          console.log('Selected Favour: ' +  event.target.value);
+        }
+        handleSubmit(event) {
+          console.log('A name submitted : ' + this.state.txtnamevalue);
+          console.log('Favour: ' + this.state.selectvalue);
+          
+          event.preventDefault();
+        }
+
+        render() {
+          return (
+            <div className="container">
+
+            <form  onSubmit={this.handleSubmit}  action="index.html">
+              <div >
+                    <label> Name: </label>
+                     <input type="text" defaultValue=""   
+                                                  onBlur={this.handleChange} className="form-control" />
+                </div>
+                <div>
+                      <label>
+                          Pick your favorite La Croix flavor:
+                            <select value={this.state.selectvalue} 
+                                          onChange={this.handleSelectChange}   className="form-control" >
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                                <option value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                          </select>
+                      </label>
+              </div>
+              <input type="submit" value="Submit" />
+            </form>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(
+        <NameForm />,   document.getElementById('root')    );
+    </script>
+  </body>
+</html>
+

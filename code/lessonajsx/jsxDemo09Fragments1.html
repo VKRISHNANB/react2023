@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Fragment</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <div id="second_root"></div>
+    <script type="text/babel">
+      const root_element = document.getElementById('root');
+      const second_root_element = document.getElementById('second_root');      
+      const first_message = <div key="1" className="message">Hello Developer</div>;
+      const second_message =<div  key="2"  className="message"> Welcome to JSX </div>;
+      const className = 'container'; 
+      const children = [first_message , second_message]; 
+      const props = {children,className}
+      const firstElement = <div {...props} />
+      const root = ReactDOM.createRoot(root_element);0
+        root.render(firstElement);
+      //ReactDOM.render( firstElement, root_element );
+
+      const secondElement = <div>Happy Coding</div>;     
+      root.render( firstElement,secondElement );
+      
+      // ReactDOM.render( secondElement, root_element );
+      const second_root = ReactDOM.createRoot(root_element);
+      second_root.render( secondElement );
+
+    </script>
+</body>
+</html>

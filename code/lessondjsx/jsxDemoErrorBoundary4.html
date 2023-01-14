@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Boundary</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/babel">
+      class ErrorBoundary extends React.Component {
+        state = {error: null}
+        static getDerivedStateFromError(error) {
+          return {error}
+        }
+        render() {
+          const {error} = this.state
+          console.log('BError');
+          if (error) {
+            console.log(error.message);
+            return (
+             
+              <div>
+                  <p>Something went wrong:</p>
+                  <pre style={{width: 200}}>{error.message}</pre>
+              </div>
+            )
+          }
+          return this.props.children
+        }
+      }
+      function  ThrowError ({error}) {
+        console.log('throwERROR');
+        throw new Error(`💥 ${error.message} 💥`)
+      }
+      function App() {
+        const [result, setResult] = React.useState(0)
+        const [firstValue, setFirstValue] = React.useState(0)
+        const [secondValue, setSecondValue] = React.useState(0)
+        const [errors, setErrors] = React.useState([{haserror: false, message: '', type: 'Info'}])
+      const errorref = React.useRef(errors[0]);
+
+       const calculate = ()=>{
+        errors[0].haserror=false;
+        errors[0].message='';
+        errors[0].type='Info';
+
+        setResult(firstValue/secondValue) ;
+        console.log('calculate:'+result+' '+errors[0].haserror);
+       }
+       
+        return (
+          <div className="container">
+              <header>
+                  <div >
+                      <img src="Smily.png" width="50" height="50"  alt="" />
+                      <h1>Divide Numbers</h1>
+                  </div>
+              </header>
+              <div className="form-group form-group-sm">
+                  <label className="col-sm-2 control-label">First Value:</label>
+                  <input type="text" defaultValue="0" onBlur={(e)=>setFirstValue(e.target.value)}  className="form-control"  style={{width: 150}}></input>
+              </div>
+              <div className="form-group form-group-sm">
+                  <label className="col-sm-2 control-label">Second Value:</label>
+                  <input type="text" defaultValue="0" onBlur={(e)=>setSecondValue(e.target.value)}   className="form-control"  style={{width: 150}}></input>
+              </div>
+              <div>
+                  <button onClick={ () => {
+                    secondValue>0 ? calculate() :  setErrors( () => [ {haserror: true, message: 'DivisibleByZERO', type: 'Severe'} ] )
+                   } } >💣</button>
+            </div>
+            <div>
+        <ErrorBoundary >
+              {  errors[0].haserror===true ? <ThrowError error={errors[0]} />  :      `Result :${result}` }
+        </ErrorBoundary>
+            </div>
+          </div>
+        )
+       }
+      ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+  </body>
+  
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+        <div id="root"></div>
+        <script type="text/babel">
+              const root_element= document.getElementById('root');
+              function DataInput({labelValue,dataref, onDataChange}) {
+                    const [data, setData] = React.useState('')
+                    React.useEffect(()=>{
+                        dataref.current = data;
+                        },[data] );
+                    return (
+                            <div className="form-group form-group-sm">
+                                <label className="col-sm-2 control-label">{labelValue}: </label>
+                                <input value={data} onChange={event => setData(event.target.value)}  onBlur={onDataChange} className="form-control"  style={{width: 150}} />
+                            </div>
+                    )
+                }
+
+
+                function Display({name,pet}) {
+                    return <div>{`Hey ${name}, your pet is ${pet}`}</div>
+                }
+//#region force-re-render
+/* 
+Is there something like forceUpdate?
+Both useState and useReducer Hooks bail out of updates if the next value is the same as the previous one. 
+Mutating state in place and calling setState will not cause a re-render.
+
+Normally, you shouldn’t mutate local state in React. However, as an escape hatch, you can use an incrementing counter to force a re-render even if the state has not changed:
+*/
+//#endregion
+                function App() {
+                  
+                    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+                    const nameref = React.useRef('');
+                    const petref = React.useRef('');
+
+                    return (
+                        <>
+                        <header>
+                            <div className="container">
+                                <img src="Smily.png" width="50" height="50"  alt="" />
+                                <h1>Lifting</h1>
+                            </div>
+                        </header>
+                        <div className="container">
+                                <form>
+                                    <DataInput labelValue="Name"  dataref={nameref}
+                                    onDataChange={ ()=> forceUpdate()} 
+                                    />
+                                    <DataInput labelValue="Favorite Animal" dataref={petref}
+                                    onDataChange={ ()=>  forceUpdate()} />
+                                    <Display name={nameref.current} pet={petref.current}/>
+                                </form>
+                        </div>
+                        </>
+                    )
+                }
+              ReactDOM.render(<App />, root_element);
+        </script>
+</body>
+</html>

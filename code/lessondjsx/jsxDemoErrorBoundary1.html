@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Boundary</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/babel">
+     
+      function App() {
+        const [result, setResult] = React.useState(0)
+        const [firstValue, setFirstValue] = React.useState(0)
+        const [secondValue, setSecondValue] = React.useState(0)
+        const [error, setError] = React.useState()
+
+        const  throwError = (message)=> {
+          try{
+               throw new Error(`💥 ${message} 💥`)
+          } catch(error)
+          {
+              setError(error);
+          }
+        }
+        return (
+          <div className="container">
+              <header>
+                  <div >
+                      <img src="Smily.png" width="50" height="50"  alt="" />
+                      <h1>Divide Numbers</h1>
+                  </div>
+              </header>
+              <div className="form-group form-group-sm">
+                  <label className="col-sm-2 control-label">First Value:</label>
+                  <input type="text" defaultValue="0" onBlur={(e)=>setFirstValue(e.target.value)}  className="form-control"  style={{width: 150}}></input>
+              </div>
+              <div className="form-group form-group-sm">
+                  <label className="col-sm-2 control-label">Second Value:</label>
+                  <input type="text" defaultValue="0" onBlur={(e)=>setSecondValue(e.target.value)}   className="form-control"  style={{width: 150}}></input>
+              </div>
+              <div>
+              <button onClick={() => {
+                secondValue>0 ? setResult(firstValue/secondValue): throwError('DivisibleByZERO' )                
+              }}>💣</button>
+            </div>
+            <div>
+               {error ? <h1>ERROR!!! {error.message}</h1> : `Result : ${result}` }
+            </div>
+          </div>
+        )
+      }
+      ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+  </body>
+  
+</html>

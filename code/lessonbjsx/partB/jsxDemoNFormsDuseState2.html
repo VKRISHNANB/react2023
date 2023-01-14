@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useState</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+            function NameForm() {
+                //
+            // *  this.setState only works in class based components.
+            // const phoneState = this.state.setState({phone: '000000'});
+
+            // *  In functional components useState hook is used which behaves as a state 
+            // * useState lets you add React state to function components.
+                // The useState hook is a special function that takes the initial state as an argument and
+                // returns an array of two entries. 
+                // const [state, setState] = useState(initialstate)
+                // The first element is the initial state (getter) and 
+                // the second one is a function that is used for updating the state (setter)
+                const [name,setName] = React.useState('empty');
+                //
+                // const nameStateArray = React.useState('');
+                // const name= nameStateArray[0];
+                // const setName= nameStateArray[1];
+                const cityStateArray = React.useState('empty');
+                const city= cityStateArray[0];
+                const setCity= cityStateArray[1];
+                const handleNameChange = (event) => {
+                            console.log(event.target.value);
+                            setName(event.target.value)
+                        }
+                const handleCityChange = (event) => setCity(event.target.value)
+                //
+                //        const  handleSubmit = ()=> {
+                //                       console.log(' Button clicked ', this); this.setState({phone: '11111'});   event.preventDefault();  }
+                const  handleSubmit = ()=> {
+                            console.log(' Button clicked ');  
+                            event.preventDefault();  }
+                return (
+                    <div className="container">
+                            <form action="index.html" >
+                               <div> 
+                                    <label htmlFor="txtname"> Name: </label>
+                                    <input id="txtname"  onBlur = {handleNameChange}
+                                                    className="form-control" />
+                                </div>
+                                <div>
+                                    <label htmlFor="txtcity"> City: </label>
+                                    <input id="txtcity"  type="text" defaultValue=""   
+                                        onBlur = {handleCityChange} className="form-control" />
+                                </div>
+                                <input type="button" onClick={handleSubmit} value="click" />
+                            </form>    
+                            <div>Name: {name}</div>
+                            <div>City: {city}</div>
+                    </div>
+                )
+            }
+            ReactDOM.render(
+        <NameForm />,   document.getElementById('root')    );
+      
+    </script>
+</body>
+</html>

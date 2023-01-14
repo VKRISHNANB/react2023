@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useState</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"   ></div>
+
+    <script type="text/babel">
+            function NameForm() {
+           
+                // LAzY initializer with useState
+                  const [name,setName] = React.useState( () => {
+                     console.log('useState');
+                     return  window.localStorage.getItem('name') || ''
+                    });
+                //
+                 // the below code has an optimization problem
+                 // the useEffect callback is being called more than it needed to be. 
+                 // it doesn't mean we have a bug in our application, so this is just an optimization to make our application run a little faster.
+                // React.useEffect(()=> {
+                //         console.log('useEffect');
+                //       window.localStorage.setItem('name',name)
+                // }
+                // );
+                //
+                // The useEffect Hook has two parameters
+                // The first argument is a ```callback function``` that by default runs after every render.
+                // The second argument is an optional Dependency array that tells the Hook to only callback 
+                // if there is a change in a target state. 
+                // The Hook compares the previous and current state value of each dependency.
+                React.useEffect(()=> {
+                        console.log('useEffect');
+                      window.localStorage.setItem('name',name)
+                },[name]
+                );
+                const cityStateArray = React.useState('');
+                 const city= cityStateArray[0];
+                 const setCity= cityStateArray[1];
+                const handleNameChange = (event) => {console.log(event.target.value); setName(event.target.value)}
+                const handleCityChange = (event) => setCity(event.target.value)
+     
+                const  handleSubmit = ()=> {
+                              console.log(' Button clicked ');  event.preventDefault();  }
+                return (
+                    <div className="container">
+                            <form action="index.html" >
+                               <div className="form-group form-group-sm"> 
+                                    <label htmlFor="txtname" 
+                                                className="col-sm-2 control-label"> Name: </label>
+                                    <input id="txtname" 
+                                                     onBlur= {handleNameChange} defaultValue =''
+                                                    className="form-control"
+                                                    style={{width: 150}} />
+                                </div>
+                                <div  className="form-group form-group-sm">
+                                    <label  className="col-sm-2 control-label"> City: </label>
+                                    <input id="txtcity"
+                                                        type="text" defaultValue=""   
+                                                        onChange = {handleCityChange}
+                                                        className="form-control"
+                                                        style={{width: 150}}  />
+                                </div>
+                                <input type="button" onClick={handleSubmit}  value="click" />
+                            </form>    
+                            <div>Name: {name}</div>
+                            <div>City: {city}</div>
+                    </div>
+                )
+            } // end of func
+            function App() {
+                const [count, setCount] = React.useState(0)
+                return (
+                    <>
+                    <h1 className="container"> Dependency </h1>
+                    <NameForm />
+                    <div className="container">
+                        <button className="btn btn-primary" 
+                                      onClick={() => setCount(c => c + 1)}>  {count}
+                        </button>
+                    </div>
+                    </>
+                )
+            }
+            ReactDOM.render(  <App/>,   document.getElementById('root')    );
+      
+    </script>
+</body>
+</html>

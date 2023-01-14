@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>refForward</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+              const root_element= document.getElementById('root');
+             
+                    const App = () => {
+                        const myRef = React.useRef(null);
+                        const handleClick = () => {
+                            myRef.current.focus()
+                            myRef.current.value='';
+                        }
+                        return (
+                            <div className="container">
+                                <header>
+                                    <div className="container">
+                                            <img src="Smily.png" width="100" height="100"  alt="Smile" />
+                                            <h1>Ref</h1>
+                                    </div>
+                                </header>
+                                <div  className="form-group form-group-sm">
+                                    <label htmlFor="txtname" className="col-sm-2 control-label" >Name: </label>
+                                    <input ref={myRef} type="text" defaultValue="" id="txtname" className="form-control"  style={{width: 150}}/>
+                                </div>
+                                <div className="form-group form-group-sm">
+                                        <label  htmlFor="txtcity"  className="col-sm-2 control-label">City: </label>
+                                        <input id="txtcity" defaultValue=""  className="form-control"  style={{width: 150}} />
+                                </div>
+                                <div>
+                                    <button onClick={handleClick}>
+                                        Click here to focus Input
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    }
+
+              ReactDOM.render(<App />, root_element);
+
+              /*
+              * 
+              * Refs are pretty common in React development. 
+              * They can be used to modify state of an input element, get focused ,
+              * blur element, store prev state, and 
+              * perform operations like increment and decrement, and 
+              * also to call functions or 
+              * provide access to child component to the properties of Parent Component. 
+              * This is what Ref forwarding means.
+              * Ref Forwarding is the passing of a ref from a parent component to one of its child components.
+              * 
+              */
+    </script>
+    
+    
+</body>
+</html>

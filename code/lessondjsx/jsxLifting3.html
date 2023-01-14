@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+        <div id="root"></div>
+        <script type="text/babel">
+              const root_element= document.getElementById('root');
+              function Name({name, onNameChange}) {
+                    return (
+                            <div className="form-group form-group-sm">
+                                <label className="col-sm-2 control-label">Name: </label>
+                                <input value={name} onChange={onNameChange}  className="form-control"  style={{width: 150}} />
+                            </div>
+                    )
+                }
+
+                function FavoriteAnimal() {
+                    const [animal, setAnimal] = React.useState('')
+                    return (
+                        <div className="form-group form-group-sm">
+                            <label className="col-sm-2 control-label">Favorite Animal: </label>
+                            <input  className="form-control"  style={{width: 150}}
+                                value={animal} 
+                                onChange={event => setAnimal(event.target.value)}
+                              
+                            />
+                        </div>
+                    )
+                }
+
+                function Display({name,pet}) {
+                    return <div>{`Hey ${name}`}</div>
+                }
+
+                function App() {
+                    const [name, setName] = React.useState('')
+                    return (
+                        <>
+                        <header>
+                            <div className="container">
+                                    <img src="Smily.png" width="50" height="50"  alt="" />
+                                    <h1>Lifting</h1>
+                            </div>
+                        </header>
+                        <div className="container">
+                                <form>
+                                    <Name  name={name}
+                                        onNameChange={event => setName(event.target.value)}
+                                    />
+                                    <FavoriteAnimal  />
+                                    <Display name={name}/>
+                                </form>
+                        </div>
+                        </>
+                    )
+                }
+              ReactDOM.render(<App />, root_element);
+        </script>
+</body>
+</html>

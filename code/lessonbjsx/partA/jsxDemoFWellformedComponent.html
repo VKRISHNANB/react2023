@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Well designed components</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function formatDate(date) {
+        return date.toLocaleDateString();
+      }
+
+      function Avatar(props) {
+        return ( <img className="Avatar" src={props.user.avatarUrl}
+            alt={props.user.name}  />
+        );
+      }
+
+      function UserInfo(props) {
+        return (
+          <div className="UserInfo">
+            <Avatar user={props.user} />
+            <div className="UserInfo-name">
+              AuthorName: <input type="text" value={props.user.name} />
+            </div>
+          </div>
+        );
+      }
+
+      function Comment(props) {
+        return (
+          <div className="Comment">
+            <UserInfo user={props.author} />
+            <div className="Comment-text">
+              Comment: <input type="text" value={props.text}/>
+            </div>
+            <div className="Comment-date">
+              Date: {formatDate(props.date)}
+            </div>
+          </div>
+        );
+      }
+
+
+      let first_comment={
+        author:{avatarUrl:"./Butterfly.jpg",name:'Venkat'},
+        text : "This is a Test",
+        date: new Date(1990,1,10)
+      }
+      ReactDOM.render(
+        <Comment date={first_comment.date} 
+        text={first_comment.text} 
+        author={first_comment.author} />,
+        document.getElementById('root')
+      );
+      
+    </script>
+  </body>
+</html>

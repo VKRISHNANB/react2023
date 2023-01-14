@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reusable Elements</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root_element = document.getElementById('root');     
+   
+      // JS Object
+      const user_data = {
+                          firstName: 'VenkataKrishnan ',
+                          lastName: 'B'
+                        };
+      // JSX Element 
+      const element = (
+                        <h1>
+                          Hello, {user_data.firstName}!
+                        </h1>
+                      );
+     
+      ReactDOM.render( element, root_element );
+    </script>
+  </body>
+</html>

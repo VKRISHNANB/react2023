@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello Forms</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class NameForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {namevalue: 'empty'};
+          this.handleChange = this.handleChange.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleChange(event) {
+          console.log('handleChange ' + event.target.value);
+          this.setState({namevalue: event.target.value.toUpperCase()});
+        }
+
+        handleSubmit(event) {
+          console.log('A name was submitted: ' + this.state.namevalue);
+         // event.preventDefault();
+        }
+
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit} action="index.html">
+                <label>
+                      Name:
+                      <input type="text" value={this.state.namevalue}   
+                                                      onChange={this.handleChange} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+          );
+        }
+      } // end of NameForm class
+      ReactDOM.render( <NameForm />,  document.getElementById('root')    );
+      // 
+      // Since the value attribute is set on our form element, 
+      // the displayed value will always be this.state.value, 
+      //. 
+      // Since handleChange runs on every keystroke to update the React state, 
+      // the displayed value will update as the user types.
+      /*
+      * The preventDefault() method cancels the event if it is cancelable, 
+      * meaning that the default action that belongs to the event will not occur.
+      * For example, :
+      *            Clicking on a "Submit" button, prevent it from submitting a form
+      * * */
+    </script>
+  </body>
+</html>

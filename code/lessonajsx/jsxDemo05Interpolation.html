@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello JSX</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+      const root_element = document.getElementById('root');
+      // Using Child element through interpolation
+      const child_element = 'Hello Developer';
+      // className attribute through interpolation
+      const className_attribute = 'container';
+      // const element = (<div className={className_attribute}>
+      //     <h1>{child_element}</h1>
+      //   </div>);
+
+      // The div element is a JSX element here so it can be a 
+      // self closing element (an empty element)
+      const element = (<div className={className_attribute} children={child_element} />);
+      const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refs</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+// 
+function useForceRender() {
+  const setC = React.useState(0)[1]
+  return () => setC((c) => c + 1)
+}
+
+       let count = 0
+  
+  function Counter() {
+    // let count = 0
+     const callHook=useForceRender()
+     //#region a
+    //  const callhook = useForceRender();
+//#endregion
+     console.log('render ' + count )
+    return (
+      <div className="flex flex-col justify-center items-center m-8">
+        <div>  {count}    </div>
+        <button
+          className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
+          onClick={ () =>{   count++ ; console.log(count) ; callHook();      } }  >
+          +1
+        </button>
+      </div>
+    )
+  }
+  const element = (
+      <div className="container">
+          <Counter />
+          <Counter />
+      </div>
+  )
+  ReactDOM.render ( element, document.getElementById('root'))
+</script>
+</body>
+</html>

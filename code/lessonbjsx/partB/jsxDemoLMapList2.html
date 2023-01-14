@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>List</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  </head>
+  <body>
+      <div >
+        <h1>Using Map and List</h1>
+      </div>
+    
+    <div id="root"></div>
+    <div>
+      <button onClick="doubleTheNumbers()" >TaskA</button>
+    </div>
+    <script type="text/babel">
+   
+    function ListNumbers()
+    {
+      const numbers = [1, 2, 3, 4, 5];
+        return (
+          numbers.map((n) =><li key={n.toString()}>{n}</li>)
+        );
+    }
+    const element =  <ul><ListNumbers/></ul>
+      ReactDOM.render( element   ,     document.getElementById('root')   );
+
+
+    function doubleTheNumbers()
+    {
+      const nos = [1, 2, 3, 4, 5];
+      const doubled = nos.map((no) => no * 2);
+      console.log(doubled);
+      ReactDOM.render(
+        <ul>{ doubled.map((d) =><li key={d.toString()}>{d}</li>)}</ul> ,
+          document.getElementById('root')
+        );
+    }
+    </script>
+  </body>
+</html>

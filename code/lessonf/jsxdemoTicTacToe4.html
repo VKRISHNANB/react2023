@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+              const root_element= document.getElementById('root');
+              
+              const Square =React.forwardRef((props, ref) =>(
+                        <button ref={ref} className="btn btn-primary" 
+                                        onClick={props.onClick} >
+                                        { ref.current? ref.current.value : ' '}
+                        </button>
+              ));
+
+              class Board extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.btnref0 = React.createRef();  
+                    this.btnref1 = React.createRef();  
+                    this.btnref2 = React.createRef();  
+                    this.btnref3 = React.createRef();  
+                    this.btnref4 = React.createRef();  
+                    this.btnref5 = React.createRef();  
+                    this.btnref6 = React.createRef();  
+                    this.btnref7 = React.createRef();  
+                    this.btnref8 = React.createRef();  
+                    this.handleClick = this.handleClick.bind(this);
+                    this.state = {forceupdate: 0};
+                }
+
+            
+                  renderSquare(i,ref){
+                        return( <Square ref={ref} value={i}
+                                    onClick={() => this.handleClick(ref)}/>)
+                    }
+                   handleClick(ref)   {
+                            ref.current.value="X";
+                        let count=this.state.forceupdate;
+                         this.setState({forceupdate: ++count});
+                    }
+                        render() {
+                            const status = 'Next player: X' ;
+                              return (
+                                    <div className="container">
+                                        <div className="status">{status}</div>
+                                        <div className="board-row">
+                                            {this.renderSquare(0,this.btnref0)}
+                                            { this.renderSquare(1,this.btnref1)}
+                                            { this.renderSquare(2,this.btnref2)}
+                                        </div>
+                                        <div className="board-row">
+                                           { this.renderSquare(3,this.btnref3)}
+                                            { this.renderSquare(4,this.btnref4)}
+                                           { this.renderSquare(5,this.btnref5)}
+                                        </div>
+                                        <div className="board-row">
+                                            { this.renderSquare(6,this.btnref6)}
+                                            { this.renderSquare(7,this.btnref7)}
+                                            { this.renderSquare(8,this.btnref8)}
+                                        </div>
+                                    </div>
+                             );
+                        }
+                }
+
+// ========================================
+              ReactDOM.render( <Board />, root_element);
+    </script>
+</body>
+</html>

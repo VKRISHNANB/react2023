@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Boundary</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://unpkg.com/react-error-boundary@1.2.5/dist/umd/react-error-boundary.js"></script>
+    <script type="text/babel">
+    //   const ErrorBoundary = ReactErrorBoundary.ErrorBoundary
+      class ErrorBoundary extends React.Component {
+        state = {error: null}
+
+        static getDerivedStateFromError(error) {
+          return {error}
+        }
+        render() {
+          const {error} = this.state
+        console.log('ErrorBoundary');
+
+          if (error) {
+            return <this.props.FallbackComponent error={error} />
+          }
+  
+          return this.props.children
+        }
+      }
+  
+      function ErrorFallback({error,ref}) {
+        {error.message ? console.log('yes'): console.log('NO')   }
+        return (
+          <div>
+            <p>Something went wrong:</p>
+            <pre>{error.message}</pre>
+          </div>
+        )
+      }
+  
+      function ThrowError() {
+        console.log('throwerror');
+        throw new Error('💥 WATCHOUT 💥')
+      }
+  
+      function App() {
+        const [explode, setExplode] = React.useState(false)
+        
+        return (
+          <div>
+            <div>
+              <button onClick={() => setExplode(!explode)}>💣</button>
+            </div>
+            <div>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                {explode ? <ThrowError /> : 'Push the button !'}
+              </ErrorBoundary>
+            </div>
+          </div>
+        )
+      }
+      ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+  </body>
+  
+</html>

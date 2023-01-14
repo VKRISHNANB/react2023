@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+              const root_element= document.getElementById('root');
+            function toIndianRupee(usd) {
+                return (usd*75);
+            }
+
+            function toUSDollar(inr) {
+                return (inr/75);
+            }
+            const currencyNames = {
+                    usd: 'US Dollar',
+                    inr: 'Indian Rupee'
+            };
+            
+            class CurrencyInput extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.handleChange = this.handleChange.bind(this);
+                        this.state = {currency: ''};
+                    }
+
+                    handleChange(e) {
+                        this.setState({currency: e.target.value});
+                    }
+
+                    render() {
+                        const currency = this.state.currency;
+                        const countryCode = this.props.code;
+                        return (
+                        <fieldset>
+                            <legend>Enter currency in {currencyNames[countryCode]}:</legend>
+                            <input value={currency}
+                                onChange={this.handleChange} />
+                        </fieldset>
+                        );
+                    }
+            }
+            class Calculator extends React.Component {
+                render() {
+                    return (
+                    <div className="container">
+                        <CurrencyInput code="usd" />
+                        <CurrencyInput code="inr" />
+                    </div>
+                    );
+                }
+            }
+              ReactDOM.render(<Calculator />, root_element);
+    </script>
+</body>
+</html>

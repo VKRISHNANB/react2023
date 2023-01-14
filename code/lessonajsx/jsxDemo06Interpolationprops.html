@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello JSX</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+      const root_element = document.getElementById('root');
+      
+      // Using Child element through interpolation
+      const child_element = 'Hello Developer';
+      // className attribute through interpolation
+      const className_attribute = 'container';
+      
+      const props = {child_element,className_attribute}   
+      // spread the props
+      const element = (<div {...props} />);
+      const root = ReactDOM.createRoot(root_element);
+        root.render(element);
+      /* ERROR
+      react-dom.development.js:61 Warning: React does not recognize the `className_attribute` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `classname_attribute` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div*/
+    </script>
+  </body>
+</html>
