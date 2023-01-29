@@ -21,10 +21,9 @@
 
             // *  In functional components useState hook is used which behaves as a state 
             // * useState lets you add React state to function components.
-                // The useState hook is a special function that takes the initial state as an argument and
-                // returns an array of two entries. 
+                // The useState hook is a special function that takes the initial state as an argument and returns an array of two entries. 
                 // const [state, setState] = useState(initialstate)
-                // The first element is the initial state (getter) and 
+                // The first element is the initial value of the state (getter) and can be used to get the last modified value of the state   
                 // the second one is a function that is used for updating the state (setter)
                 const [name,setName] = React.useState('empty');
                 //
@@ -43,8 +42,9 @@
                 //        const  handleSubmit = ()=> {
                 //                       console.log(' Button clicked ', this); this.setState({phone: '11111'});   event.preventDefault();  }
                 const  handleSubmit = ()=> {
-                            console.log(' Button clicked ');  
-                            event.preventDefault();  }
+                            console.log(' Button clicked ' + event.target.form.);  
+                            event.preventDefault();                             
+                         }
                 return (
                     <div className="container">
                             <form action="index.html" >
@@ -65,9 +65,11 @@
                     </div>
                 )
             }
-            ReactDOM.render(
-        <NameForm />,   document.getElementById('root')    );
-      
+        //     ReactDOM.render(
+        // <NameForm />,   document.getElementById('root')    );
+  const root_element = document.getElementById('root');
+        const root = ReactDOM.createRoot(root_element);
+        root.render( <NameForm />);
     </script>
 </body>
 </html>

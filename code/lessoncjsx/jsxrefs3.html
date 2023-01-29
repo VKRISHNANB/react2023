@@ -47,13 +47,15 @@
     </div>
 
   )
-  ReactDOM.render ( element, document.getElementById('root'))
+ // ReactDOM.render ( element, document.getElementById('root'))
 /*
 *  useRef doesn't trigger a rerender when the value is updated
 * In fact, being able to persist a value across rerenders without triggering another rerender is exactly why useRef is created. 
 Sometimes we just don't want the component to rerender when the value is updated.
 */
-
+const root_element = document.getElementById('root');
+  const root = ReactDOM.createRoot(root_element);
+        root.render(element);
 </script>
 </body>
 </html>

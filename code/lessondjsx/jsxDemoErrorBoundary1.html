@@ -55,7 +55,10 @@
           </div>
         )
       }
-      ReactDOM.render(<App />, document.getElementById('root'))
+      const root_element = document.getElementById('root');
+        const root = ReactDOM.createRoot(root_element);
+        root.render(<App />);
+      // ReactDOM.render(<App />, document.getElementById('root'))
     </script>
   </body>
   

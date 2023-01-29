@@ -25,8 +25,8 @@ function useForceRender() {
      let count = 0
      const callHook=useForceRender()
      //#region a
-    //  const callhook = useForceRender();
-//#endregion
+     //  const callhook = useForceRender();
+     //#endregion
      console.log('render ' + count )
     return (
       <div className="flex flex-col justify-center items-center m-8">
@@ -44,7 +44,10 @@ function useForceRender() {
           <Counter />
       </div>
   )
-  ReactDOM.render ( element, document.getElementById('root'))
+  // ReactDOM.render ( element, document.getElementById('root'))
+  const root_element = document.getElementById('root');
+  const root = ReactDOM.createRoot(root_element);
+        root.render(element);
 </script>
 </body>
 </html>

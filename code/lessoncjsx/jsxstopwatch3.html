@@ -37,8 +37,10 @@
                 </div>
             )
             }
-        ReactDOM.render(<StopWatch />, document.getElementById('root'))
-
+        // ReactDOM.render(<StopWatch />, document.getElementById('root'))
+        const root_element = document.getElementById('root');
+        const root = ReactDOM.createRoot(root_element);
+        root.render(<StopWatch />);
     </script>
 </body>
 </html>

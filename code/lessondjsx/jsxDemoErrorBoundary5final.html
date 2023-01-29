@@ -89,7 +89,10 @@
           </div>
         )
       }
-      ReactDOM.render(<App />, document.getElementById('root'))
+      const root_element = document.getElementById('root');
+        const root = ReactDOM.createRoot(root_element);
+        root.render(<App />);
+      // ReactDOM.render(<App />, document.getElementById('root'))
 /*
 *  provide a key to an instance of ErrorBoundary component 
 *  to reset the instant.error in the next render phase.

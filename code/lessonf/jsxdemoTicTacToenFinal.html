@@ -16,7 +16,7 @@
         const root_element= document.getElementById('root');
         function Square(props) {
                 return (
-                    <button className="square" onClick={props.onClick}>
+                    <button className="square" value="empty" onClick={props.onClick}>
                             {props.value}
                     </button>
                 );
@@ -139,8 +139,8 @@
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById("root"));
-
+        const root = ReactDOM.createRoot(root_element);
+        root.render(<Game />);
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],

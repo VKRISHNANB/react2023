@@ -20,14 +20,14 @@
       React.useEffect(() => { // This runs every time AFTER the Counter is rendered.
              previousCount.current = count
             oldCount = count
-            console.log('UseEffect: prv: '+previousCount.current +' old:'+oldCount);
+            console.log('UseEffect: prv: '+previousCount.current +' original:'+oldCount);
         })
      console.log('render - prv: ' +previousCount.current+ ' current: '+ count +
-       ' old:' +oldCount )
+       ' original:' +oldCount )
     return (
       <div className="flex flex-col justify-center items-center m-8">
         <div>
-             Prev: {previousCount.current}, current: {count}, OldCount: {oldCount}
+             Prev: {previousCount.current}, current: {count}, originalCount: {oldCount}
         </div>
         <button
           className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
@@ -43,7 +43,10 @@
         <Counter />
     </div>
   )
-  ReactDOM.render ( element, document.getElementById('root'))
+//  ReactDOM.render ( element, document.getElementById('root'))
+const root_element = document.getElementById('root');
+  const root = ReactDOM.createRoot(root_element);
+        root.render(element);
 </script>
 </body>
 </html>

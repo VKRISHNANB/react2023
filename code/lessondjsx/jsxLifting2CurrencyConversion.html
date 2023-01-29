@@ -13,7 +13,6 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-              const root_element= document.getElementById('root');
             function toIndianRupee(usd) {
                 return (usd*75);
             }
@@ -80,7 +79,10 @@
                     );
                 }
             }
-              ReactDOM.render(<Calculator />, root_element);
+            const root_element = document.getElementById('root');
+        const root = ReactDOM.createRoot(root_element);
+        root.render(<Calculator />);
+            //   ReactDOM.render(<Calculator />, root_element);
     </script>
 </body>
 </html>

@@ -14,12 +14,12 @@
 <body>
     <div id="root"></div>
     <script type="text/javascript">
-        const root_element = document.getElementById('root');
         // root_element.innerHTML='<div>Hello Developer</div>';
         const element = React.createElement('div', {
             className: 'container',
             children: 'Hello Dev'
         });
+        const root_element = document.getElementById('root');
         const root = ReactDOM.createRoot(root_element);
         root.render(element);
        //  OLD React syntax
